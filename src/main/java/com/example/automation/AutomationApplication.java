@@ -9,7 +9,7 @@ public class AutomationApplication {
 
 	@GetMapping
 	public String message(){
-		return "Welcome to Automation Code";
+		return "Welcome to Automation World!";
 	}
 	public static void main(String[] args) {
 		SpringApplication.run(AutomationApplication.class, args);
