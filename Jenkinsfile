@@ -11,11 +11,17 @@ pipeline{
 
             }
         }
+        stage('Test'){
+                    steps{
+                        sh 'mvn test'
+                    }
+                }
         stage('Build Docker Image'){
             steps{
                 sh 'docker build -t sachithram/devops-integration .'
             }
         }
+
         stage('Push Image to Docker Hub'){
             steps{
                withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
