@@ -31,13 +31,7 @@ pipeline{
             }
         }
         
-         stage('Push Image to Nexus Repo'){
-            steps{
-                                  
-                sh 'docker login -u admin -p admin http://10.101.16.48:8083/repository/my-app-repo/'           
-                sh 'docker push 10.101.16.48:8083/repository/my-app-repo/'
-            }
-        }
+        
 
 
 
