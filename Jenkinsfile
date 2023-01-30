@@ -3,6 +3,11 @@ pipeline{
     tools{
         maven 'maven'
     }
+    
+   
+    
+    
+    
     stages{
         stage('Build Maven'){
             steps{
@@ -30,6 +35,9 @@ pipeline{
                 sh 'docker push sachithram/devops-integration'
             }
         }
+        
+        
+        
         
         
 
