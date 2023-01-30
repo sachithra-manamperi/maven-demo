@@ -31,13 +31,7 @@ pipeline{
             }
         }
         
-        stage('Push Image to Nexus Repo'){
-            steps{
-                                  
-                      
-                sh 'docker push 10.101.16.48:8085/my-app-repo/devops-intergration'
-            }
-        }
+        
 
 
         
