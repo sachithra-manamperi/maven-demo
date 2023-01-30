@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @SpringBootApplication
 public class AutomationApplication {
 
-	@GetMapping
+	@GetMapping("/welcome")
 	public String message(){
 		return "Welcome to Automation World!";
 	}
