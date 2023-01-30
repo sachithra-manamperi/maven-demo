@@ -35,7 +35,7 @@ pipeline{
             steps{
                                   
                       
-                sh 'docker push 10.101.16.48:8085/repository/my-app-repo/'
+                sh 'docker push 10.101.16.48:8085/my-app-repo/devops-intergration'
             }
         }
 
