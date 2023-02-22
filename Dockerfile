@@ -1,6 +1,6 @@
 # Stage 1: Build the app using OpenJDK 8 on Alpine
 # Use an official Java runtime as the base image
-FROM openjdk:8-jdk-alpine as builder
+FROM maven:3-jdk-8-alpine as builder
 
 # Set the working directory in the container
 WORKDIR /app
