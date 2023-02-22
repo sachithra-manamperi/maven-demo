@@ -3,8 +3,7 @@
 trigger:
 - main
 
-pool:
-  vmImage: 'ubuntu-latest'
+pool: myUbuntuAgent
 
 variables:
   dockerRegistryServiceConnection: 'sachithra-docker-hub'
