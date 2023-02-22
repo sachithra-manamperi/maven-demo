@@ -9,7 +9,8 @@ WORKDIR /app
 COPY . /app
 
 # Install Gradle and build the project
-RUN ./gradlew build
+RUN mvn clean install
+RUN mvn test
 
 # List artifacts to see the name of the jar file
 RUN ls -l build/libs/
