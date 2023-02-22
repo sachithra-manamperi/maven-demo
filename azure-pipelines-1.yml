@@ -1,26 +1,29 @@
-
-
 trigger:
 - main
 
+#defines the build agent pool to be used for this pipeline
 pool: myUbuntuAgent
 
+#defines variables that will be used throughout the pipeline
 variables:
   dockerRegistryServiceConnection: 'sachithra-docker-hub'
   imageRepository: 'sachithram/devops-integration'
   containerRegistry: 'docker.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
+  #uses the build ID as the tag.
 
+#This section defines the different stages of the pipeline.
 stages:
+#Stage section defines the first stage, which is called BuildDockerImage
+#jobs section defines the jobs that will run in this stage
 - stage: BuildDockerImage
   displayName: 'Build Docker Image'
   jobs:
   - job: Build
     displayName: 'Build'
     steps:
-   
-    
+    #steps section defines the steps that will run in this job.    
     - task: Docker@2
       displayName: 'Build Docker image'
       inputs:
@@ -31,7 +34,9 @@ stages:
         tags: |
           $(tag)
           latest
-
+    #First line of Task section "task: Docker@2" specifies ,the Docker task should be used to perform the build      
+    #tags section specifies that the Docker image should also be tagged as "latest" $(tag) is used to tag as build ID
+    #command: 'build' This line specifies the Docker command to run, which is to build the Docker image.
 - stage: PushDockerImage
   displayName: 'Push Docker Image to Docker Hub'
   dependsOn: BuildDockerImage
@@ -49,3 +54,6 @@ stages:
         tags: |
           $(tag)
           latest
+
+#dependsOn: This line specifies this stage depends on the successful completion of the previous stage.
+#condition: succeeded() This line specifies that this stage should only run if the previous stage completed successfully
