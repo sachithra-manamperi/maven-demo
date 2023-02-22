@@ -35,7 +35,7 @@ stages:
           $(tag)
           latest
     #First line of Task section "task: Docker@2" specifies ,the Docker task should be used to perform the build      
-    #tags section specifies that the Docker image should also be tagged as "latest" $(tag) is used to tag as build ID
+    #tags section specifies that the Docker image should also be tagged as "latest". $(tag) is used to tag as build ID
     #command: 'build' This line specifies the Docker command to run, which is to build the Docker image.
 - stage: PushDockerImage
   displayName: 'Push Docker Image to Docker Hub'
