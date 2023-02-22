@@ -7,13 +7,9 @@ trigger:
 - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: myUbuntuAgent
 
 steps:
-
-- task: MavenAuthenticate@0
-  inputs:
-    artifactsFeeds: 'maven-feed'
     
 - task: Maven@4
   inputs:
@@ -26,16 +22,5 @@ steps:
     testResultsFiles: '**/TEST-*.xml'
     goals: 'package'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    artifactName: 'drop'
-    pathToPublish: '$(Build.ArtifactStagingDirectory)'
-
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-    echo Starting the build
-    mvn package
   
   displayName: 'Run a multi-line script'
