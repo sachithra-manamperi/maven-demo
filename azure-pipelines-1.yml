@@ -1,0 +1,53 @@
+
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  dockerRegistryServiceConnection: 'sachithra-docker-hub'
+  imageRepository: 'sachithram/devops-integration'
+  containerRegistry: 'docker.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: BuildDockerImage
+  displayName: 'Build Docker Image'
+  jobs:
+  - job: Build
+    displayName: 'Build'
+    steps:
+    - checkout: git://github.com/SachPrecious/maven-demo.git
+      fetchDepth: 1
+      ref: refs/heads/main
+    - task: Docker@2
+      displayName: 'Build Docker image'
+      inputs:
+        containerRegistry: $(dockerRegistryServiceConnection)
+        repository: $(imageRepository)
+        command: 'build'
+        Dockerfile: $(dockerfilePath)
+        tags: |
+          $(tag)
+          latest
+
+- stage: PushDockerImage
+  displayName: 'Push Docker Image to Docker Hub'
+  dependsOn: BuildDockerImage
+  condition: succeeded()
+  jobs:
+  - job: Push
+    displayName: 'Push'
+    steps:
+    - task: Docker@2
+      displayName: 'Push Docker image'
+      inputs:
+        containerRegistry: $(dockerRegistryServiceConnection)
+        repository: $(imageRepository)
+        command: 'push'
+        tags: |
+          $(tag)
+          latest
