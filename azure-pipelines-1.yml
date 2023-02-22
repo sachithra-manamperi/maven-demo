@@ -21,7 +21,7 @@ stages:
     steps:
     - checkout: git://github.com/SachPrecious/maven-demo.git
       fetchDepth: 1
-      ref: refs/heads/main
+    
     - task: Docker@2
       displayName: 'Build Docker image'
       inputs:
